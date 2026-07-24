@@ -25,13 +25,13 @@ binaries remains a time-consuming process. This project explores how AI can impr
 replacing the analyst.
 
 Ultimately, the platform will allow users to:
-• Load executable files for analysis.
-• Browse discovered functions and program structure.
-• Explore imports, exports, strings, and symbols.
-• Visualize control flow and relationships between functions.
-• Search semantically across the program.
-• Ask questions about specific routines.
-• Receive AI-generated explanations that are grounded in deterministic program analysis.
++ Load executable files for analysis.
++ Browse discovered functions and program structure.
++ Explore imports, exports, strings, and symbols.
++ Visualize control flow and relationships between functions.
++ Search semantically across the program.
++ Ask questions about specific routines.
++ Receive AI-generated explanations that are grounded in deterministic program analysis.
 
 The software is intended only to assist human reasoning. I have no desire in replacing it. I am after all, human.
 
@@ -54,16 +54,16 @@ understanding over rapid feature development.
 
 ### Learn the fundamentals.
 The project serves as a vehicle for studying:
-• Executable file formats
-• Assembly language
-• Static analysis
-• Control flow graphs
-• Binary parsing
-• Information retrieval 
-• Embeddings
-• Retrieval-Augmented Generation (RAG)
-• LLM integration
-• Desktop software architecture
++ Executable file formats
++ Assembly language
++ Static analysis
++ Control flow graphs
++ Binary parsing
++ Information retrieval 
++ Embeddings
++ Retrieval-Augmented Generation (RAG)
++ LLM integration
++ Desktop software architecture
 
 Understanding why these technologies exist is considered just as important as learning how to use them.
 
@@ -92,18 +92,18 @@ between responsibilities.
 ## Planned Features
 
 The long term roadmap includes support for:
-• Executable parsing
-• Function discovery
-• Disassembly browsing
-• Import and export analysis
-• String extraction
-• Cross-reference navigation
-• Control flow graph visualization 
-• Call graph exploration
-• Semantic function search
-• AI-assisted function explanations 
-• Project persistence
-• Analyst annotations
++ Executable parsing
++ Function discovery
++ Disassembly browsing
++ Import and export analysis
++ String extraction
++ Cross-reference navigation
++ Control flow graph visualization 
++ Call graph exploration
++ Semantic function search
++ AI-assisted function explanations 
++ Project persistence
++ Analyst annotations
 
 The implementation order will emphasize building a solid analytical foundation before introducing AI capabilities.
 
@@ -114,18 +114,18 @@ In addition to producing useful software, this repository serves as a structured
 and software architecture.
 
 Topics explored throughout development will include:
-• Computer architecture 
-• Operating systems
-• Executable formats (PE, ELF, Mach-O)
-• Assembly language
-• Compiler output
-• Graph theory
-• Static program analysis
-• Object-oriented software design
-• Retrieval-Augmented Generation
-• Vector embeddings
-• Prompt engineering
-• Large language model integration
++ Computer architecture 
++ Operating systems
++ Executable formats (PE, ELF, Mach-O)
++ Assembly language
++ Compiler output
++ Graph theory
++ Static program analysis
++ Object-oriented software design
++ Retrieval-Augmented Generation
++ Vector embeddings
++ Prompt engineering
++ Large language model integration
 
 Project documentation will evolve alongside the implementation to explain the concepts, tradeoffs, and architectural
 decisions encountered throughout development.
@@ -136,11 +136,11 @@ decisions encountered throughout development.
 This project is currently in the planning and architecture phase.
 
 Initial work focuses on:
-• Defining project goals.
-• Designing the software architecture.
-• Establishing engineering principles.
-• Studying executable formats and reverse engineering fundamentals.
-• Planning incremental implementation milestones.
++ Defining project goals.
++ Designing the software architecture.
++ Establishing engineering principles.
++ Studying executable formats and reverse engineering fundamentals.
++ Planning incremental implementation milestones.
 
 No production analysis functionality has been implemented yet. Soon enough...
 
