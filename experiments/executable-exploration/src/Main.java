@@ -43,20 +43,16 @@ public class Main {
 
     private static String getMachineName(int machineType) {
 
-        switch (machineType) {
+        return switch (machineType) {
 
-            case 0x14C:
-                return "x86";
+            case 0x14C -> "x86";
 
-            case 0x8664:
-                return "x64";
+            case 0x8664 -> "x64";
 
-            case 0xAA64:
-                return "ARM64";
+            case 0xAA64 -> "ARM64";
 
-            default:
-                return String.format("Unknown (0x%04X)", machineType);
-        }
+            default -> String.format("Unknown (0x%04X)", machineType);
+        };
     }
 
     private static int getNumberOfSections(byte[] coffHeader) {
@@ -82,6 +78,34 @@ public class Main {
             name.append((char) sectionHeader[i]);
         }
         return name.toString();
+    }
+
+    private static int getSectionTableOffset(int peOffset, int optionalHeaderSize) {
+        return peOffset + 4 + 20 + optionalHeaderSize;
+    }
+
+    private static int getSectionVirtualSize(byte[] sectionHeader) {
+
+        ByteBuffer buffer = createLittleEndianBuffer(sectionHeader);
+        return buffer.getInt(8);
+    }
+
+    private static int getSectionVirtualAddress(byte[] sectionHeader) {
+
+        ByteBuffer buffer = createLittleEndianBuffer(sectionHeader);
+        return buffer.getInt(12);
+    }
+
+    private static int getSectionRawSize(byte[] sectionHeader) {
+
+        ByteBuffer buffer = createLittleEndianBuffer(sectionHeader);
+        return buffer.getInt(16);
+    }
+
+    private static int getSectionRawPointer(byte[] sectionHeader) {
+
+        ByteBuffer buffer = createLittleEndianBuffer(sectionHeader);
+        return buffer.getInt(20);
     }
 
 
@@ -145,7 +169,7 @@ public class Main {
 
             System.out.printf("Optional Hdr : %d bytes%n", optionalHeaderSize);
 
-            int sectionTableOffset = peOffset + 4 + 20 + optionalHeaderSize;
+            int sectionTableOffset = getSectionTableOffset(peOffset, optionalHeaderSize);
             input.getChannel().position(sectionTableOffset);
 
             System.out.println();
@@ -154,13 +178,30 @@ public class Main {
 
             int numberOfSections = getNumberOfSections(coffHeader);
 
+            if (numberOfSections <= 0) {
+                System.out.println("No sections found.");
+                return;
+            }
+
             for (int i = 0; i < numberOfSections; i++) {
 
                 byte[] sectionHeader = new byte[40];
                 input.read(sectionHeader);
 
                 String name = getSectionName(sectionHeader);
-                System.out.printf("%2d. %s%n", i + 1, name);
+                int virtualSize = getSectionVirtualSize(sectionHeader);
+                int virtualAddress = getSectionVirtualAddress(sectionHeader);
+                int rawSize = getSectionRawSize(sectionHeader);
+                int rawPointer = getSectionRawPointer(sectionHeader);
+
+                System.out.printf("%2d. Section Name : %s%n", i + 1, name);
+
+                System.out.printf("    Virtual Size : 0x%X%n", virtualSize);
+                System.out.printf("    Virtual Addr : 0x%X%n", virtualAddress);
+                System.out.printf("    Raw Size     : 0x%X%n", rawSize);
+                System.out.printf("    Raw Offset   : 0x%X%n", rawPointer);
+
+                System.out.println();
             }
     
 
