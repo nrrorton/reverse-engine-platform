@@ -23,3 +23,23 @@ Next steps:
 
 - Begin studying executable formats. (I'll be finding docs, and knowing myself, going excruciatingly slow)
 - Developing the domain model within this.
+
+
+## Session 002 - Begin scaffolding API message layer
+
+Date: 2026-07-26
+
+I've been reading through more of the FastAPI and Microsoft PE documentation. It's a lot, but if I want to be good at something, I know it takes sincere time and dedication.
+
+Completed today:
+
+- FastAPI analysis service initialized.
+- Health endpoint created (generic content for now).
+- Analysis endpoint created.
+- Pydantic analysis contract defined (6 classes currently; ExecutableInfo, Sections, Import, Function, ExtractedString, AnalysisResponse).
+- Service created to separate logic from the analyzer itself. 
+- Mock analyzer implemented with filler test data.
+
+What's up next:
+
+- Replacing the mock analyzer with a real PE analyzer (begin studying LIEF).
