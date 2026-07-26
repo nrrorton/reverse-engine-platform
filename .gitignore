@@ -1,0 +1,17 @@
+# Python
+analysis-service/.venv/
+analysis-service/__pycache__/
+analysis-service/**/*.py[cod]
+
+# Java
+desktop/build/
+dektop/.gradle/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
