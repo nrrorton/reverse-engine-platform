@@ -1,10 +1,17 @@
 from pydantic import BaseModel
 
+from app.schemas.sections import SectionInfo
+from app.schemas.imports import ImportInfo
+
+
+
+
 class ExecutableInfo(BaseModel):
 
     name: str
     architecture: str
-    entry_point: str | None = None
+    entry_point_rva: str | None = None
+    sha256: str
 
 
 class Section(BaseModel):
@@ -38,7 +45,7 @@ class AnalysisResponse(BaseModel):
 
     status: str
     executable: ExecutableInfo
-    sections: list[Section]
-    imports: list[Import]
+    sections: list[SectionInfo]
+    imports: list[ImportInfo]
     functions: list[Function]
     strings: list[ExtractedString]

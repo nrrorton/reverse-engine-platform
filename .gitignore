@@ -5,7 +5,7 @@ analysis-service/**/*.py[cod]
 
 # Java
 desktop/build/
-dektop/.gradle/
+desktop/.gradle/
 
 # VS Code
 .vscode/

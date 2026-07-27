@@ -12,4 +12,4 @@ analysis_service = AnalysisService()
 @router.post('/analysis', response_model=AnalysisResponse)
 async def analyze_file(file: UploadFile = File(...)):
 
-    return analysis_service.analyze(file.filename)
+    return analysis_service.analyze(file)
