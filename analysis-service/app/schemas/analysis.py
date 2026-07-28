@@ -37,8 +37,9 @@ class Function(BaseModel):
 
 class ExtractedString(BaseModel):
 
-    address: str
+    address: str | None = None
     value: str
+    length: int
 
 
 class AnalysisResponse(BaseModel):

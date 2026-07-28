@@ -2,7 +2,9 @@ from pathlib import Path
 
 import lief
 
-from app.schemas.analysis import (AnalysisResponse, ExecutableInfo)
+from app.models.executable import Executable
+from app.models.pe_analysis_result import PEAnalysisResult
+
 from app.mappers.lief_mapper import LIEFMapper
 
 
@@ -15,14 +17,14 @@ class PEAnalyzer:
 
     def analyze(
             self, file_path: Path, original_name: str, file_hash: str
-        ) -> AnalysisResponse:
+        ) -> PEAnalysisResult:
 
         binary = lief.PE.parse(str(file_path))
 
         if binary is None:
             raise ValueError("Failed to parse PE executable.")
 
-        executable = ExecutableInfo(
+        executable = Executable(
             name=original_name,
             architecture=str(binary.header.machine),
             entry_point_rva=hex(binary.optional_header.addressof_entrypoint),
@@ -46,11 +48,8 @@ class PEAnalyzer:
         print(f'First Entry Dir: {dir(first_entry)}')
         '''
 
-        return AnalysisResponse(
-            status='completed',
+        return PEAnalysisResult(
             executable=executable,
             sections=self.mapper.map_sections(binary),
-            imports=self.mapper.map_imports(binary),
-            functions=[],
-            strings=[]
+            imports=self.mapper.map_imports(binary)
         )
