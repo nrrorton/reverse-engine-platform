@@ -2,11 +2,13 @@ from fastapi import UploadFile
 
 from app.analyzers.pe_analyzer import PEAnalyzer
 from app.analyzers.string_analyzer import StringAnalyzer
+from app.analyzers.entropy_analyzer import EntropyAnalyzer
 
 from app.services.file_service import FileService
 from app.services.hash_service import HashService
 
 from app.schemas.analysis import AnalysisResponse
+from app.schemas.entropy import EntropyResponse, SectionEntropyResponse
 
 from app.mappers.string_mapper import StringMapper
 from app.mappers.executable_mapper import ExecutableMapper
@@ -21,6 +23,7 @@ class AnalysisService:
 
         self.pe_analyzer = PEAnalyzer()
         self.string_analyzer = StringAnalyzer()
+        self.entropy_analyzer = EntropyAnalyzer()
 
         self.string_mapper = StringMapper()
         self.executable_mapper = ExecutableMapper()
@@ -39,6 +42,20 @@ class AnalysisService:
 
             strings = self.string_mapper.map_strings(string_result.strings)
 
+            with open(path, 'rb') as binary_file:
+                data = binary_file.read()
+            file_entropy = self.entropy_analyzer.calculate(data)
+
+            section_entropy = []
+
+            for section in pe_result.section_data:
+                entropy = self.entropy_analyzer.calculate(section.content)
+                section_entropy.append(
+                    SectionEntropyResponse(
+                        name=section.name, entropy=entropy
+                    )
+                )
+
             return AnalysisResponse(
                 status='completed',
                 executable=self.executable_mapper.map_executable(
@@ -47,5 +64,8 @@ class AnalysisService:
                 sections=pe_result.sections,
                 imports=pe_result.imports,
                 functions=[],
-                strings=strings
+                strings=strings,
+                entropy=EntropyResponse(
+                    file_entropy=file_entropy, sections=section_entropy
+                )
             )

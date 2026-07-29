@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 from app.schemas.sections import SectionInfo
 from app.schemas.imports import ImportInfo
+from app.schemas.entropy import EntropyResponse
 
 
 
@@ -50,3 +51,4 @@ class AnalysisResponse(BaseModel):
     imports: list[ImportInfo]
     functions: list[Function]
     strings: list[ExtractedString]
+    entropy: EntropyResponse

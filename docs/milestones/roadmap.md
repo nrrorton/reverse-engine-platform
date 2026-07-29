@@ -135,3 +135,25 @@ Topics:
 Deliverable:
 
 AI assistant capable of explaining analyzed code.
+
+
+
+## Sprint Roadmap 
+
+Sprint 1 - Project Foundation [x]
+
+Sprint 2 - PE Analysis [x]
+
+Sprint 3 - String Extraction [x]
+
+Sprint 4 - Entropy Analysis
+
+Sprint 5 - Function Discovery
+
+Sprint 6 - Control Flow Graphs
+
+Sprint 7 - String/Import Intelligence
+
+Sprint 8 - Analysis Correlation
+
+Sprint 9 - LLM-Assisted Explanations
