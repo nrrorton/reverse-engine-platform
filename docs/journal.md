@@ -25,7 +25,7 @@ Next steps:
 - Developing the domain model within this.
 
 
-## Session 002 - Begin scaffolding API message layer
+## Session 003 - Begin scaffolding API message layer
 
 Date: 2026-07-26
 
@@ -43,3 +43,25 @@ Completed today:
 What's up next:
 
 - Replacing the mock analyzer with a real PE analyzer (begin studying LIEF).
+
+
+## Session 006 - Making sense of extracted strings
+
+Date: 2026-07-29
+
+Obviously the order in which you pass arguments to a function that expects them in a certain order is important...Just to remember that I'm still incredibly junior.
+
+It was decided yesterday (I know, I'm missing sessions in this journal (a couple now even..)) to build a format independent string extraction engine after finding that LIEF doesn't support dedicated general purpose string extraction.
+
+Completed over the pass three days:
+
+- ASCII string extraction.
+- File offset tracking.
+- The integration of mappers to remove this logic from the analyzers. 
+- AnalysisService is now just an orchestrator.
+- Created unit tests to test and verify string extraction works as intended (also just to learn more about Pytest).
+
+For the future me:
+
+- Will work on string classification after understanding all this a bit more.
+- I want to make this more section aware, also.

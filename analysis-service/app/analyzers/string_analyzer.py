@@ -18,22 +18,40 @@ class StringAnalyzer:
         Analyze a binary file and returning the extracted strings.
         '''
 
+        current_offset = None
         extracted_strings = []
         current_string = []
 
         with open(file_path, 'rb') as binary_file:
+
+            offset = 0
+
             while byte := binary_file.read(1):
 
                 if self._is_printable_ascii(byte):
+
+                    if not current_string:
+                        current_offset = offset
+
                     current_string.append(chr(byte[0]))
 
                 else:
                     self._save_string_if_valid(
-                        current_string, extracted_strings
+                        current_offset=current_offset,
+                        current_string=current_string,
+                        extracted_strings=extracted_strings
                     )
 
+                    current_offset = None
+
+                offset += 1
+
         # Here we're handling strings ending at EOF
-        self._save_string_if_valid(current_string, extracted_strings)
+        self._save_string_if_valid(
+            current_offset=current_offset,
+            current_string=current_string,
+            extracted_strings=extracted_strings
+        )
 
         return StringAnalysisResult(
             strings=extracted_strings,
@@ -47,6 +65,7 @@ class StringAnalyzer:
 
     def _save_string_if_valid(
             self,
+            current_offset: int | None,
             current_string: list[str],
             extracted_strings: list[ExtractedString]
     ) -> None:
@@ -56,8 +75,12 @@ class StringAnalyzer:
             value = ''.join(current_string)
 
             extracted_strings.append(
-                ExtractedString(value=value, length=len(value))
+                ExtractedString(
+                    offset=current_offset, 
+                    value=value, 
+                    length=len(value))
             )
 
         current_string.clear()
+        return None
     

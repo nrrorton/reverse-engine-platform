@@ -9,5 +9,5 @@ class StringMapper:
 
         return [
             StringSchema(
-                value=item.value, length=item.length)
+                offset=item.offset, value=item.value, length=item.length)
                 for item in strings]

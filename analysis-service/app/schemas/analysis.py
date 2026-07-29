@@ -37,7 +37,7 @@ class Function(BaseModel):
 
 class ExtractedString(BaseModel):
 
-    address: str | None = None
+    offset: int
     value: str
     length: int
 
