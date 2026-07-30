@@ -1,4 +1,4 @@
-from app.schemas.imports import ImportInfo, ImportedFunction
+from app.models.import_data import (ImportData, ImportedFunction)
 
 
 
@@ -15,7 +15,7 @@ class LIEFMapper:
                 if entry.name:
                     functions.append(ImportedFunction(name=entry.name))
             imports.append(
-                ImportInfo(
+                ImportData(
                     library=library.name,
                     functions=functions
                 )

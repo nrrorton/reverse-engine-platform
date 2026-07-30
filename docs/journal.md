@@ -67,3 +67,24 @@ For the future me:
 - I want to make this more section aware, also.
 
 To end the night, I got back into this after dinner and refactored the section analysis completely. Found that I was attempting to integrate sections into the JSON response twice and had to clean this up before things got out of hand. All is well now.
+
+
+
+## Session 007 - Import Intelligence and realizing refactoring is just a part of the whole thing
+
+Date: 2026-07-30
+
+Feels like it can very quickly become a messy codebase and refuse to accept that as acceptable. Spent some time refactoring the import model setup and am now using an import_data model while leaving the imports schema as a strict API contract only. I like the idea of using mappers to translate info from the domain models to the API layer and will represent upcoming function parsing in this way.
+
+Completed today:
+
+- Reworked import logic moving from a central schema to a domain model with mapping to the analysis API.
+- Added an intelligence directory with five standard Windows APIs (will expand this library soon).
+- Cleaned up some wording and unused imports after the rework.
+- Created a import analyzer test suite and added three tests to help ensure stability.
+
+On the upcoming agenda:
+
+- Function discovery (Similar to imports but with some added requirements).
+- Studying Capstone as it will be necessary for function discovery.
+- String intelligence on the radar.

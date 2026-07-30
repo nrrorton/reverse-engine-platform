@@ -2,6 +2,7 @@ from fastapi import UploadFile
 
 from app.analyzers.pe_analyzer import PEAnalyzer
 from app.analyzers.string_analyzer import StringAnalyzer
+from app.analyzers.import_analyzer import ImportAnalyzer
 
 from app.services.entropy_service import EntropyService
 from app.services.file_service import FileService
@@ -12,6 +13,7 @@ from app.schemas.analysis import AnalysisResponse
 from app.mappers.string_mapper import StringMapper
 from app.mappers.executable_mapper import ExecutableMapper
 from app.mappers.section_mapper import SectionMapper
+from app.mappers.import_mapper import ImportMapper
 
 
 
@@ -25,10 +27,12 @@ class AnalysisService:
 
         self.pe_analyzer = PEAnalyzer()
         self.string_analyzer = StringAnalyzer()
+        self.import_analyzer = ImportAnalyzer()
 
         self.string_mapper = StringMapper()
         self.executable_mapper = ExecutableMapper()
         self.section_mapper = SectionMapper()
+        self.import_mapper = ImportMapper()
 
 
     def analyze(self, upload_file: UploadFile):
@@ -39,6 +43,8 @@ class AnalysisService:
             pe_result = self.pe_analyzer.analyze(
                 path, upload_file.filename, file_hash
             )
+
+            imports = self.import_analyzer.analyze(pe_result.imports)
 
             string_result = self.string_analyzer.analyze(path)
 
@@ -54,7 +60,9 @@ class AnalysisService:
                 sections=self.section_mapper.map_sections(
                     pe_result.sections
                 ),
-                imports=pe_result.imports,
+                imports=self.import_mapper.map_imports(
+                    imports
+                ),
                 functions=[],
                 strings=strings,
             )

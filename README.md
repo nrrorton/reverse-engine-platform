@@ -92,11 +92,11 @@ between responsibilities.
 ## Planned Features
 
 The long term roadmap includes support for:
-+ Executable parsing
++ Executable parsing [x]
 + Function discovery
 + Disassembly browsing
-+ Import and export analysis
-+ String extraction
++ Import and export analysis [x]
++ String extraction [x]
 + Cross-reference navigation
 + Control flow graph visualization 
 + Call graph exploration
@@ -133,16 +133,28 @@ decisions encountered throughout development.
 
 ## Current Status
 
-This project is currently in the planning and architecture phase.
+Beyond the planning stage and now currently in prodution.
 
-Initial work focuses on:
-+ Defining project goals.
-+ Designing the software architecture.
-+ Establishing engineering principles.
-+ Studying executable formats and reverse engineering fundamentals.
-+ Planning incremental implementation milestones.
+### Current Analysis Capabilities
 
-No production analysis functionality has been implemented yet. Soon enough...
+Platform currently supports:
+- PE executable parsing
+- Executable metadata extraction
+- Section metadata extraction
+- Section entropy calculation
+- Printable string extraction
+- Imported API extraction
+- Windows API capability classification (very limited currently)
+
+## Roadmap
+
+Future analysis capabilities:
+- Function discovery
+- Disassembly integration
+- Control flow graph generation
+- Import and string correlation
+- Suspicious behavior heuristics
+- AI-
 
 
 ## License

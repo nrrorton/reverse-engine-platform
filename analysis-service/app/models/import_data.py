@@ -1,8 +1,9 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
 
-class ImportedFunction(BaseModel):
+@dataclass
+class ImportedFunction:
 
     name: str
     category: str | None = None
@@ -11,7 +12,8 @@ class ImportedFunction(BaseModel):
 
 
 
-class ImportInfo(BaseModel):
+@dataclass
+class ImportData:
 
     library: str
     functions: list[ImportedFunction]
