@@ -5,11 +5,11 @@ from app.models.section_data import SectionData
 
 
 
-@dataclass(frozen=True)
+@dataclass
 class PEAnalysisResult:
 
     executable: Executable
-    sections: list
+    sections: list[SectionData]
     imports: list
-    section_data: list[SectionData]
+    
     

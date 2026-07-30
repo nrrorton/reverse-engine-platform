@@ -65,3 +65,5 @@ For the future me:
 
 - Will work on string classification after understanding all this a bit more.
 - I want to make this more section aware, also.
+
+To end the night, I got back into this after dinner and refactored the section analysis completely. Found that I was attempting to integrate sections into the JSON response twice and had to clean this up before things got out of hand. All is well now.

@@ -25,12 +25,17 @@ class PEAnalyzer:
         if binary is None:
             raise ValueError("Failed to parse PE executable.")
 
-        section_data = []
+        sections = []
 
         for section in binary.sections:
-            section_data.append(SectionData(
-                name=section.name, content=bytes(section.content)
-            ))
+            sections.append(SectionData(
+                name=section.name,
+                virtual_address=hex(section.virtual_address),
+                virtual_size=section.virtual_size,
+                raw_offset=section.pointerto_raw_data,
+                size=section.size,
+                content=bytes(section.content))
+            )
 
         executable = Executable(
             name=original_name,
@@ -60,7 +65,6 @@ class PEAnalyzer:
 
         return PEAnalysisResult(
             executable=executable,
-            sections=self.mapper.map_sections(binary),
-            imports=self.mapper.map_imports(binary),
-            section_data=section_data
+            sections=sections,
+            imports=self.mapper.map_imports(binary)
         )
