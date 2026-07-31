@@ -10,6 +10,9 @@ class ExecutableMapper:
         return ExecutableInfo(
             name=executable.name,
             architecture=executable.architecture,
-            entry_point_rva=executable.entry_point_rva,
+            entry_point_rva=(
+                hex(executable.entry_point_rva)
+                if executable.entry_point_rva is not None
+                else None),
             sha256=executable.sha256
         )

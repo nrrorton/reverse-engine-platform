@@ -17,7 +17,7 @@ class ExecutableInfo(BaseModel):
 class Section(BaseModel):
 
     name: str
-    virtual_address: str
+    virtual_address: int
     raw_offset: int
     size: int
 
@@ -30,8 +30,9 @@ class Import(BaseModel):
 
 class Function(BaseModel):
 
+    id: int
     address: str
-    size: int
+    size: int | None = None
     name: str | None = None
 
 

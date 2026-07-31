@@ -11,7 +11,7 @@ class SectionMapper:
         return [
             SectionInfo(
                 name=section.name,
-                virtual_address=section.virtual_address,
+                virtual_address=hex(section.virtual_address),
                 virtual_size=section.virtual_size,
                 raw_offset=section.raw_offset,
                 size=section.size,

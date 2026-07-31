@@ -25,6 +25,7 @@ Next steps:
 - Developing the domain model within this.
 
 
+
 ## Session 003 - Begin scaffolding API message layer
 
 Date: 2026-07-26
@@ -43,6 +44,7 @@ Completed today:
 What's up next:
 
 - Replacing the mock analyzer with a real PE analyzer (begin studying LIEF).
+
 
 
 ## Session 006 - Making sense of extracted strings
@@ -88,3 +90,22 @@ On the upcoming agenda:
 - Function discovery (Similar to imports but with some added requirements).
 - Studying Capstone as it will be necessary for function discovery.
 - String intelligence on the radar.
+
+
+
+## Session 008 - Establishing the foundations for function discovery
+
+Date: 2026-07-31
+
+I looked to AI for quite a bit of assistance here. Trying to figure out the math for when Capstone should start translating bytes was truly daunting and I'll admit a bit of defeat here. Not that I'm anti-AI, just that I'm doing my best to make all opportunities learning opportunites. That said, still feel that I'm learning plenty, even given the short duration.
+
+What's now done:
+
+- There's now a FunctionData and InstructionData model.
+- Completed the function analysis pipeline.
+- Created separate functions in the Function Analyzer to convert RVA to file offsets and extract bytes from each section.
+
+Now what?:
+
+- Now to integrate Capstone given those extracted bytes (the docs make this look super easy, we shall see).
+- Tidying things up a bit and deciding if I need a separate sections schema. May remove and refactor after thinking on it a bit.

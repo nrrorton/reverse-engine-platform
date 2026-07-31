@@ -30,7 +30,7 @@ class PEAnalyzer:
         for section in binary.sections:
             sections.append(SectionData(
                 name=section.name,
-                virtual_address=hex(section.virtual_address),
+                virtual_address=section.virtual_address,
                 virtual_size=section.virtual_size,
                 raw_offset=section.pointerto_raw_data,
                 size=section.size,
@@ -40,7 +40,7 @@ class PEAnalyzer:
         executable = Executable(
             name=original_name,
             architecture=str(binary.header.machine),
-            entry_point_rva=hex(binary.optional_header.addressof_entrypoint),
+            entry_point_rva=binary.optional_header.addressof_entrypoint,
             sha256=file_hash
         )
 

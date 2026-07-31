@@ -6,7 +6,7 @@ from dataclasses import dataclass
 class SectionData:
 
     name: str
-    virtual_address: str
+    virtual_address: int
     virtual_size: int
     raw_offset: int
     size: int

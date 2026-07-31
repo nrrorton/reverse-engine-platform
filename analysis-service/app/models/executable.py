@@ -10,6 +10,6 @@ class Executable:
 
     name: str
     architecture: str
-    entry_point_rva: str | None
+    entry_point_rva: int | None
     sha256: str
     
