@@ -3,9 +3,14 @@ from pathlib import Path
 from app.models.function_data import FunctionData
 from app.models.pe_analysis_result import PEAnalysisResult
 
+from app.disassemblers.capstone_disassembler import CapstoneDisassembler
+
 
 
 class FunctionAnalyzer:
+
+    def __init__(self):
+        self.disassembler = CapstoneDisassembler()
 
     def analyze(
             self, file_path: Path, pe_result: PEAnalysisResult
@@ -23,17 +28,20 @@ class FunctionAnalyzer:
         file_offset = self._rva_to_file_offset(entry_rva, section)
 
         code_bytes = self._extract_bytes(file_path, file_offset)
-        print(code_bytes[:20].hex())
 
-        print('Entry RVA:', hex(entry_rva))
-        print('Section:', section.name)
-        print('File offset:', hex(file_offset))
+        instructions = self.disassembler.disassemble(
+            code_bytes, entry_rva)
+
+        print(f'Disassembled {len(instructions)} instructions')
+        for instruction in instructions:
+            print(hex(instruction.address), instruction.mnemonic, instruction.operands)
 
         entry_function = FunctionData(
             id=1, 
             address=entry_rva,
             size=None,
-            name='entry'
+            name='entry',
+            instructions=instructions
         )
 
         return [entry_function]

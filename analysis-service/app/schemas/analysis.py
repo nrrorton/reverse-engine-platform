@@ -34,6 +34,14 @@ class Function(BaseModel):
     address: str
     size: int | None = None
     name: str | None = None
+    instructions: list[Instruction]
+
+
+class Instruction(BaseModel):
+
+    address: str
+    mnemonic: str
+    operands: str
 
 
 class ExtractedString(BaseModel):

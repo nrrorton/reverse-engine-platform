@@ -109,3 +109,22 @@ Now what?:
 
 - Now to integrate Capstone given those extracted bytes (the docs make this look super easy, we shall see).
 - Tidying things up a bit and deciding if I need a separate sections schema. May remove and refactor after thinking on it a bit.
+
+
+
+## Session 009 - Setting up the Capstone disassembler
+
+Date: 2026-08-01
+
+Been a busy day, but wanted to get even just a tiny bit built. Importing Capstone and setting up the disassembler wasn't bad at all.
+
+Completed today:
+
+- Capstone disassembler created and mapped to the function analyzer.
+- Created one unit test (will expand this).
+- Verified instructions are being returned in the API response.
+
+Up next:
+
+- Define logic to determine when a function ends (right now I'm just feeding Capstone the first 100 bytes).
+- Just keep building from here and trying not to get carried away.

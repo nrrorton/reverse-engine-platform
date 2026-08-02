@@ -1,6 +1,6 @@
 from app.models.function_data import FunctionData
 
-from app.schemas.analysis import Function
+from app.schemas.analysis import Function, Instruction
 
 
 
@@ -13,7 +13,15 @@ class FunctionMapper:
                 id=function.id,
                 address=hex(function.address),
                 size=function.size,
-                name=function.name
+                name=function.name,
+                instructions=[
+                    Instruction(
+                        address=hex(instruction.address),
+                        mnemonic=instruction.mnemonic,
+                        operands=instruction.operands
+                    )
+                    for instruction in function.instructions
+                ]
             )
             for function in functions
         ]
