@@ -16,3 +16,4 @@ class FunctionData:
     name: str | None
 
     instructions: list[InstructionData] = field(default_factory=list)
+    calls: list[int] = field(default_factory=list)

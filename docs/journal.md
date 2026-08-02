@@ -128,3 +128,23 @@ Up next:
 
 - Define logic to determine when a function ends (right now I'm just feeding Capstone the first 100 bytes).
 - Just keep building from here and trying not to get carried away.
+
+
+
+## Session 010 - Functions: recursive discovery, call target extraction, size calculation, boundary determination
+
+Date: 2026-08-02
+
+It was incredibly rewarding seeing how a lot of the DSA practice I've been doing outside of this project intertwines with today's work. In the recursive function discovery, I'm using a set to add visited functions and checking each time to see that the function isn't in visited before recursing (is that a word?). Just pretty cool to see small things come together in such a way.
+
+Done for now (maybe I'll do more later):
+
+- Can now find the entry point of the executable.
+- Reworked the function analyzer so that the conversion of the relative virtual address (RVA) to offset is more robust.
+- Created several private methods in the function analyzer and moved a lot of the logic out of the main analyze method itself.
+- Checking to see if the mnemonic == 'call' and creating a calls list based on this.
+
+What's to come:
+
+- There's still a lot to improve as far as function naming, relationships, and just overall accuracy.
+- Need to start studying control flow graphs as integrating these will be the next major step.

@@ -11,4 +11,6 @@ class InstructionData:
     address: int
     mnemonic: str
     operands: str
+    size: int
+    target: int | None = None
     

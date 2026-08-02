@@ -14,11 +14,18 @@ class FunctionMapper:
                 address=hex(function.address),
                 size=function.size,
                 name=function.name,
+                calls=[hex(call) for call in function.calls],
                 instructions=[
                     Instruction(
                         address=hex(instruction.address),
                         mnemonic=instruction.mnemonic,
-                        operands=instruction.operands
+                        operands=instruction.operands,
+                        size=instruction.size,
+                        target=(
+                            hex(instruction.target)
+                            if instruction.target is not None
+                            else None
+                        )
                     )
                     for instruction in function.instructions
                 ]
