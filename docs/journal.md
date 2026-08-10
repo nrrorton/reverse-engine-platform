@@ -148,3 +148,21 @@ What's to come:
 
 - There's still a lot to improve as far as function naming, relationships, and just overall accuracy.
 - Need to start studying control flow graphs as integrating these will be the next major step.
+
+
+
+## Session 011 - Enhance Function Functionality (only a wee bit this evening)
+
+Date: 2026-08-09
+
+I just wanted to get in here and make a few small updates after a very long week at work and further hectic weekend. Very much hope to find time this upcoming week to focus more on building my project. We shall see...
+
+Little bit further accomplished:
+
+- Added called_function_ids field to better visualize relationships between called functions.
+- Cleaned up unused dead code in the function analyzer.
+
+And then:
+
+- Expand the import intelligence by adding 38 more descriptions to the five in import_knowledge currently.
+- Continue to expand function relationship mapping in anticipation of call graphing (can I say it like that?).

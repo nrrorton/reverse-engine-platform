@@ -31,6 +31,8 @@ class FunctionAnalyzer:
 
         self._discover_function(file_path, pe_result, entry_rva)
 
+        self._resolve_function_relationship()
+
         return self.functions
     
 
@@ -62,49 +64,6 @@ class FunctionAnalyzer:
             binary_file.seek(offset)
 
             return binary_file.read(size)
-
-
-    def _find_entry_function(
-            self, file_path: Path, pe_result: PEAnalysisResult
-        ) -> FunctionData | None:
-
-        if pe_result.executable.entry_point_rva is None:
-            return None
-
-        entry_rva = pe_result.executable.entry_point_rva
-
-        section = self._find_section_for_rva(entry_rva, pe_result.sections)
-
-        if section is None:
-            return None
-
-        file_offset = self._rva_to_file_offset(entry_rva, section)
-
-        code_bytes = self._extract_bytes(file_path, file_offset, 500)
-
-        instructions = self.disassembler.disassemble(code_bytes, entry_rva)
-        instructions = self._find_function_boundary(instructions)
-
-        function_size = self._calculate_function_size(instructions)
-
-        calls = self._extract_call_targets(instructions)
-
-        return self._build_function(
-            entry_rva, function_size, instructions, calls
-        )
-
-
-    def _build_function(
-            self, address: int, size: int, instructions, calls) -> FunctionData:
-
-        return FunctionData(
-            id=1,
-            address=address,
-            size=size,
-            name='entry',
-            instructions=instructions,
-            calls=calls
-        )
 
 
     def _find_function_boundary(
@@ -187,3 +146,18 @@ class FunctionAnalyzer:
 
         for target in calls:
             self._discover_function(file_path, pe_result, target)
+
+
+    def _resolve_function_relationship(self):
+
+        functions_by_address = {
+            function.address: function
+            for function in self.functions
+        }
+
+        for function in self.functions:
+            for call in function.calls:
+                target_function = functions_by_address.get(call)
+
+                if target_function is not None:
+                    function.called_function_ids.append(target_function.id)

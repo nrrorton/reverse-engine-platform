@@ -17,3 +17,4 @@ class FunctionData:
 
     instructions: list[InstructionData] = field(default_factory=list)
     calls: list[int] = field(default_factory=list)
+    called_function_ids: list[int] = field(default_factory=list)

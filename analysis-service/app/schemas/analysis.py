@@ -35,9 +35,10 @@ class Function(BaseModel):
     size: int | None = None
     name: str | None = None
     calls: list[str]
+    called_function_ids: list[int] = []
     instructions: list[Instruction]
     
-
+    
 
 class Instruction(BaseModel):
 

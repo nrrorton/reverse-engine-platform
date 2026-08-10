@@ -15,6 +15,7 @@ class FunctionMapper:
                 size=function.size,
                 name=function.name,
                 calls=[hex(call) for call in function.calls],
+                called_function_ids=function.called_function_ids,
                 instructions=[
                     Instruction(
                         address=hex(instruction.address),
