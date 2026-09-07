@@ -166,3 +166,24 @@ And then:
 
 - Expand the import intelligence by adding 38 more descriptions to the five in import_knowledge currently.
 - Continue to expand function relationship mapping in anticipation of call graphing (can I say it like that?).
+
+
+
+## Session 012 - Coming back after about a months break 
+
+Date: 2026-09-07
+
+It's been awhile. Getting back into the swing of things with school and work still has me quite occupied. There will be a skill in not just letting a half-finished project go to waste. This project now serves to also
+hone said skill. 
+
+What I did today:
+
+- Expanded the import knowledge file adding ~30 Windows APIs to help categorize and define a broader scope of function names discovered.
+- That's it. Any amount of progress is good progress though, right? Don't be discouraged, I whisper to myself, non-crazily.
+
+Up next:
+
+- Need to establish a cleaner distinction between direct, indirect, and unresolved calls in the function discovery.
+- Call relationships then lead to call graphs/control flow graphs. 
+
+I'm just going to do what I can. Rome wasn't built in a day and I'm most certainly not wasting time outside of this project.
