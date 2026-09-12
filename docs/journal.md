@@ -187,3 +187,23 @@ Up next:
 - Call relationships then lead to call graphs/control flow graphs. 
 
 I'm just going to do what I can. Rome wasn't built in a day and I'm most certainly not wasting time outside of this project.
+
+
+
+## Session 013 - Getting calls and tests in a better place
+
+Date: 2026-09-12
+
+I'm trying to get the PE analysis portion of this project into a decent enough place so that we can move on to the next phase. This is as much 
+a learning exercise as it is trying to produce something that might be worth anything in the long run. In fact, I would argue with myself in this 
+moment that it is considerably more about gaining knowledge of binary parsing/programming in general than it is anything else. 
+
+Accomplished on this date:
+
+- Expanded the instruction data model with CallType enum.
+- My Capstone disassembler now extracts the call type and the mapper displays.
+
+On deck:
+
+- Call graphs are what makes sense.
+- Let's start thinking about integrating an LLM to explain the provided parsed information.
