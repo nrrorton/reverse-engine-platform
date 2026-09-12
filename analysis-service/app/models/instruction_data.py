@@ -1,4 +1,11 @@
 from dataclasses import dataclass
+from enum import Enum
+
+
+
+class CallType(Enum):
+    DIRECT = 'direct'
+    INDIRECT = 'indirect'
 
 
 
@@ -13,4 +20,5 @@ class InstructionData:
     operands: str
     size: int
     target: int | None = None
+    call_type: CallType | None = None
     

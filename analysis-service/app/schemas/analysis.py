@@ -47,6 +47,7 @@ class Instruction(BaseModel):
     operands: str
     size: int
     target: str | None = None
+    call_type: str | None = None
 
 
 class ExtractedString(BaseModel):

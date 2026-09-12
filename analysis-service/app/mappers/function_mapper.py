@@ -26,6 +26,11 @@ class FunctionMapper:
                             hex(instruction.target)
                             if instruction.target is not None
                             else None
+                        ),
+                        call_type=(
+                            instruction.call_type.value
+                            if instruction.call_type is not None
+                            else None
                         )
                     )
                     for instruction in function.instructions

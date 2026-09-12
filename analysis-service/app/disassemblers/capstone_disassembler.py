@@ -3,7 +3,7 @@ from capstone import (
 )
 from capstone.x86 import X86_OP_IMM
 
-from app.models.instruction_data import InstructionData
+from app.models.instruction_data import InstructionData, CallType
 
 
 
@@ -20,13 +20,17 @@ class CapstoneDisassembler:
 
         for instruction in self.disassembler.disasm(code, address):
 
+            target = self._get_instruction_target(instruction)
+            call_type = self._get_call_type(instruction)
+
             instructions.append(
                 InstructionData(
                     address=instruction.address,
                     mnemonic=instruction.mnemonic,
                     operands=instruction.op_str,
                     size=instruction.size,
-                    target=self._get_instruction_target(instruction)
+                    target=target,
+                    call_type=call_type
                 )
             )
 
@@ -42,4 +46,16 @@ class CapstoneDisassembler:
                     return operand.imm
 
         return None
+
+
+    def _get_call_type(self, instruction) -> CallType | None:
+
+        if not instruction.group(CS_GRP_CALL):
+            return None
+
+        for operand in instruction.operands:
+            if operand.type == X86_OP_IMM:
+                return CallType.DIRECT
+
+        return CallType.INDIRECT
 
