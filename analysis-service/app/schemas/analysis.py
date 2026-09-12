@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.schemas.sections import SectionInfo
 from app.schemas.imports import ImportInfo
@@ -35,7 +35,7 @@ class Function(BaseModel):
     size: int | None = None
     name: str | None = None
     calls: list[str]
-    called_function_ids: list[int] = []
+    called_function_ids: list[int] = Field(default_factory=list)
     instructions: list[Instruction]
     
     
