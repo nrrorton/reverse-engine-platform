@@ -207,3 +207,24 @@ On deck:
 
 - Call graphs are what makes sense.
 - Let's start thinking about integrating an LLM to explain the provided parsed information.
+
+
+
+## Session 014 - Let's throw some LLMs into the mix
+
+Date: 2026-09-19
+
+Using OpenRouter to wire in free models and have them analyze the provided analysis body. Seeing a lot of weaknesses here, but gives me a very good idea of what needs improving.
+
+Alas I've:
+
+- Created an account on OpenRouter, configured an API key, and provided this key to my new llm_service.
+- The llm_services analyze method receives my analysis services response body along with a system prompt advising of its expert reverse-engineering analyst role.
+- Created an intelligence schema to ensure a consist AI Analysis response.
+- Updated the analysis schema to include the AI Analysis response.
+- The analysis service now includes the AI response in the full API response body.
+
+And now what:
+
+- I need to refactor the intelligence significantly. Right now, I'm receiving a ton of information the model is deducing based on facts about what the compiler has included, not what the program actually does/contains.
+- Get that in shape and start thinking about a simple UI layer to help strengthen Java skills and allow for an easy drag and drop PE analysis end-to-end pipeline. 

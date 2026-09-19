@@ -8,6 +8,7 @@ from app.analyzers.function_analyzer import FunctionAnalyzer
 from app.services.entropy_service import EntropyService
 from app.services.file_service import FileService
 from app.services.hash_service import HashService
+from app.services.llm_service import LLMService
 
 from app.schemas.analysis import AnalysisResponse
 
@@ -26,6 +27,7 @@ class AnalysisService:
         self.file_service = FileService()
         self.hash_service = HashService()
         self.entropy_service = EntropyService()
+        self.llm_service = LLMService()
 
         self.pe_analyzer = PEAnalyzer()
         self.string_analyzer = StringAnalyzer()
@@ -58,7 +60,7 @@ class AnalysisService:
 
             self.entropy_service.analyze_sections(pe_result.sections)
 
-            return AnalysisResponse(
+            analysis_response = AnalysisResponse(
                 status='completed',
                 executable=self.executable_mapper.map_executable(
                     pe_result.executable
@@ -74,3 +76,11 @@ class AnalysisService:
                 ),
                 strings=strings,
             )
+
+            ai_analysis = self.llm_service.analyze(analysis_response)
+
+            analysis_response = analysis_response.model_copy(
+                update={'intelligence': ai_analysis}
+            )
+
+            return analysis_response

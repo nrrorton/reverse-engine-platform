@@ -15,3 +15,5 @@ desktop/.gradle/
 
 # Logs
 *.log
+
+.env

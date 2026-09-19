@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 
 from app.schemas.sections import SectionInfo
 from app.schemas.imports import ImportInfo
+from app.schemas.intelligence import AIAnalysis
 
 
 
@@ -65,3 +66,4 @@ class AnalysisResponse(BaseModel):
     imports: list[ImportInfo]
     functions: list[Function]
     strings: list[ExtractedString]
+    intelligence: AIAnalysis | None = None
