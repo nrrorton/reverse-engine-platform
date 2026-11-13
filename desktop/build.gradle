@@ -21,3 +21,7 @@ javafx {
 application {
     mainClass = 'com.reverseengineering.Main'
 }
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+}

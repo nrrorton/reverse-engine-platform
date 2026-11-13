@@ -228,3 +228,21 @@ And now what:
 
 - I need to refactor the intelligence significantly. Right now, I'm receiving a ton of information the model is deducing based on facts about what the compiler has included, not what the program actually does/contains.
 - Get that in shape and start thinking about a simple UI layer to help strengthen Java skills and allow for an easy drag and drop PE analysis end-to-end pipeline. 
+
+
+
+## Session 016? - Haven't been as diligent with journaling as I meant to be
+
+Date: 2026-11-12
+
+Combing the last undocumented session with today's, there is now a Java frontend hooked up. I used significant help from an LLM in doing so and not sure that I really learned a whole heck of a lot as I had intended to... the curse of AI, I'm afraid.
+
+Now though:
+
+- Frontend in which we can now drag and drop the executable and the JSON displays neatly.
+- Added some logging after getting 500 errors related to the OpenRouter calls.
+
+Next:
+
+- To really focus on the backend, making sure the static analysis is as refined as can be.
+- Learning more, but actually learning, not just using an LLM to produce code and typing it all in (as if this is better than just blindly copying).

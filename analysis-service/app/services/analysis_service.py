@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import UploadFile
 
 from app.analyzers.pe_analyzer import PEAnalyzer
@@ -19,6 +21,7 @@ from app.mappers.import_mapper import ImportMapper
 from app.mappers.function_mapper import FunctionMapper
 
 
+logger = logging.getLogger(__name__)
 
 
 class AnalysisService:
@@ -77,7 +80,13 @@ class AnalysisService:
                 strings=strings,
             )
 
-            ai_analysis = self.llm_service.analyze(analysis_response)
+            try:
+                ai_analysis = self.llm_service.analyze(analysis_response)
+
+            except Exception:
+                logger.exception("LLM analysis failed")
+                ai_analysis = None
+
 
             analysis_response = analysis_response.model_copy(
                 update={'intelligence': ai_analysis}

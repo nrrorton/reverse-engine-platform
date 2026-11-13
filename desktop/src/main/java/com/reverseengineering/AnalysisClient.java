@@ -33,9 +33,6 @@ public class AnalysisClient {
                 "Content-Type: application/octet-stream\r\n\r\n"
             ).getBytes(StandardCharsets.UTF_8);
 
-            System.out.println(
-                new String(header, StandardCharsets.UTF_8)
-            );
 
             byte[] footer = (
                 "\r\n--" + boundary + "--\r\n"
@@ -69,9 +66,6 @@ public class AnalysisClient {
                 .POST(HttpRequest.BodyPublishers.ofByteArray(body))
                 .build();
 
-            System.out.println(
-                request.headers().map()
-            );
 
             HttpResponse<String> response = client.send(
                 request,

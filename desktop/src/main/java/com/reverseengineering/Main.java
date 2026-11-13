@@ -3,13 +3,17 @@ package com.reverseengineering;
 import java.io.File;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -25,12 +29,28 @@ public class Main extends Application {
             "Drop PE executable here"
         );
 
-        StackPane root = new StackPane(label);
+        AnalysisResultView resultView =
+            new AnalysisResultView();
+
+        ExecutableOverview overview =
+            new ExecutableOverview();
+
+        BorderPane root = new BorderPane();
+        root.setTop(label);
+        
+        VBox content = new VBox(10);
+        content.getChildren().addAll(overview, resultView);
+
+        VBox.setVgrow(
+            resultView,
+            javafx.scene.layout.Priority.ALWAYS
+        );
+
+        root.setCenter(content);
 
         root.setStyle(
             "-fx-border-color: #888888;" +
             "-fx-border-width: 2;" +
-            "-fx-border-style: dashed;" +
             "-fx-padding: 40;"
         );
 
@@ -69,11 +89,21 @@ public class Main extends Application {
                     Thread analysisThread = new Thread(() -> {
                         try {
                             String json = analysisClient.analyze(file);
-                            System.out.println(json);
                             Platform.runLater(() -> {
-                                label.setText(
-                                    "Analysis complete: " + file.getName()
-                                );
+                                try {
+                                    ObjectMapper mapper = new ObjectMapper();
+                                    JsonNode rootNode = mapper.readTree(json);
+                                    overview.display(rootNode);
+                                    resultView.display(json);
+                                    label.setText(
+                                        "Analysis complete: " + file.getName()
+                                    );
+                                } catch (Exception exception) {
+                                    exception.printStackTrace();
+                                    label.setText(
+                                        "unable to display analysis results"
+                                    );
+                                }
                             });
                         } catch (Exception exception) {
                             exception.printStackTrace();

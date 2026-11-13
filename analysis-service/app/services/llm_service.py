@@ -81,6 +81,16 @@ class LLMService:
 
         content = response.choices[0].message.content
 
+        choice = response.choices[0]
+
+        print("Finish reason:", choice.finish_reason)
+        print("Model:", response.model)
+        print("Prompt tokens:", response.usage.prompt_tokens)
+        print("Completion tokens:", response.usage.completion_tokens)
+
+        if not content:
+            raise ValueError('LLM returned an empty response')
+
         return AIAnalysis.model_validate(
             json.loads(content)
         )
